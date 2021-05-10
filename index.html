@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        margin: 10px 10px;
+      }
+      li {
+        
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <input name="todo" id="input" placeholder="write todo" />
+    <div id="todo-list" onclick="remove()"></div>
+    <button onclick="addtodo()">Add Todo</button>
+  </body>
+  <script src="todo.js"></script>
+  <script>
+    let list = document.getElementById("todo-list");
+
+    // create a object of Class
+
+    let listEle = new MakeTodoList(list);
+
+
+    console.log("current  ...........", listEle.getList); //   getter method
+
+    // add something to list
+
+    function addtodo() {
+      let input = document.getElementById("input").value;
+      listEle.addTodo(input); //  calling method from class
+
+    }
+
+    // simple utility function
+
+    function getEventTarget(e) {
+      e = e || window.event;
+      return e.target || e.srcElement;
+    }
+
+    // delete some item from list
+
+    function remove() {
+      let updated = document.getElementById("todo-list");
+      updated.onclick = function(event) {
+  
+        var target=event.target;
+    
+        listEle.removeTodo(target.innerText);
+      };
+    }
+  </script>
+</html>
